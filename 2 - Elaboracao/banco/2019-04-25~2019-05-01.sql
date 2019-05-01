@@ -1,0 +1,6 @@
+﻿CREATE TABLE `aaa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ds` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+GO

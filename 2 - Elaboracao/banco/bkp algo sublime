@@ -1,0 +1,27 @@
+while (rs.next()) {
+				String coffeeName = rs.getString("COF_NAME");
+				int supplierID = rs.getInt("SUP_ID");
+				float price = rs.getFloat("PRICE");
+				int sales = rs.getInt("SALES");
+				int total = rs.getInt("TOTAL");
+				System.out.println(coffeeName + "\t" + supplierID + "\t" + price + "\t" + sales + "\t" + total);
+			}
+
+
+
+			
+	public static ResultSet Executar(String sql) throws SQLException {
+		Statement stmt = null;
+		try {
+			stmt = ConexaoMySql.connection.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			return rs;
+		} catch (SQLException e) {
+			System.out.print("Erro! " + e.getMessage());
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
+		return null;
+	}
