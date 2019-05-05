@@ -4,10 +4,34 @@ import java.sql.*;
 
 public class DAO {
 
+	public static String format(String sql, String identifier, String value) {
+		return sql.replace("@" + identifier, "'" + value + "'");
+	}
+
+	public static String format(String sql, String identifier, Boolean value) {
+
+		String valuen = (value ? 1 : 0) + "";
+		return sql.replace("@" + identifier, valuen);
+	}
+
+	public static String format(String sql, String identifier, int value) {
+
+		String valuen = value + "";
+		return sql.replace("@" + identifier, valuen);
+	}
+
+	// -------------------------------------------------------------------
+
+	public static String format(String sql, String identifier, Double value) {
+
+		String valuen = value.toString();
+		return sql.replace("@" + identifier, valuen);
+	}
+
 	public static void Conectar() {
 		try {
 			ConexaoMySql.Conectar();
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			System.out.print("Erro! " + e.getMessage());
 		}
 	}
@@ -20,12 +44,13 @@ public class DAO {
 		try {
 			ConexaoMySql.connection.beginRequest();
 			ConexaoMySql.connection.setAutoCommit(false);
-		} catch (SQLException e) {			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		Savepoint save = null;
 		try {
-			//save = ConexaoMySql.connection.setSavepoint(java.util.UUID.randomUUID().toString());
+			// save =
+			// ConexaoMySql.connection.setSavepoint(java.util.UUID.randomUUID().toString());
 			save = ConexaoMySql.connection.setSavepoint();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -34,7 +59,7 @@ public class DAO {
 		return save;
 	}
 
-	public static void CancelarSQL(Savepoint save)  {
+	public static void CancelarSQL(Savepoint save) {
 		try {
 			ConexaoMySql.connection.rollback(save);
 		} catch (SQLException e) {
@@ -61,9 +86,9 @@ public class DAO {
 		}
 		return null;
 	}
-	
+
 	public static Statement NewStm() throws SQLException {
-	
-		return ConexaoMySql.connection.createStatement();	
+
+		return ConexaoMySql.connection.createStatement();
 	}
 }

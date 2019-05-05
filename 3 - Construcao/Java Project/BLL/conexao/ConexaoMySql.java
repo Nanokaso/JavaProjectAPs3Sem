@@ -10,8 +10,8 @@ public class ConexaoMySql {
 	public static void Conectar() throws InstantiationException, IllegalAccessException {
 		if (connection == null) {
 			try {
-				Class.forName(config.driver).newInstance();
-				connection = DriverManager.getConnection(config.url, config.usuario, config.senha);
+				Class.forName(_config.driver).newInstance();
+				connection = DriverManager.getConnection(_config.url, _config.usuario, _config.senha);
 				if (connection == null) {
 					System.out.println("Erro ao conectar!");
 				}
