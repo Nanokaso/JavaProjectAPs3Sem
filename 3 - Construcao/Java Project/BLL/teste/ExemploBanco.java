@@ -14,8 +14,8 @@ public class ExemploBanco {
 			String sql = "Select * from aaa;";
 			ResultSet rs = DAO.NewStm().executeQuery(sql);
 			while (rs.next()) {
-				int id = rs.getInt("id");
-				String ds = rs.getString("ds");
+				int id = rs.getInt("ID");
+				String ds = rs.getString("DS");
 				System.out.println(id + "     " + ds);
 			}
 			// stmt.close(); // nao tao necessario se fecha a conexao antes de outra execucao
