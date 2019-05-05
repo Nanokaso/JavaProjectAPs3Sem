@@ -13,11 +13,20 @@ public class Doenca {
 		DAO.Conectar();
 		try {
 			String sql = "";
+
+			sql += " SELECT T.*, TT.DS_TIPOTRATAMENTO FROM DOENCA_TRATAMENTO AS DT ";
+			sql += " INNER JOIN TRATAMENTO AS T ON T.ID_TRATAMENTO = DT.ID_TRATAMENTO ";
+			sql += " INNER JOIN TIPOTRATAMENTO AS TT ON T.ID_TIPOTRATAMENTO = TT.ID_TIPOTRATAMENTO ";
+			sql += " WHERE 1=1 ";
+			sql += " AND DT.ID_DOENCA = @iddoenca ";
+
+			sql = DAO.format(sql, "iddoenca", IdDoenca);
+
 			ResultSet rs = DAO.NewStm().executeQuery(sql);
 			while (rs.next()) {
 				TratamentoTO c = new TratamentoTO();
 
-				c.ID_TRATAMENTO = rs.getInt("TRATAMENTO");
+				c.ID_TRATAMENTO = rs.getInt("ID_TRATAMENTO");
 				c.DS_TRATAMENTO = rs.getString("DS_TRATAMENTO");
 
 				c.ID_TIPOTRATAMENTO = rs.getInt("ID_TIPOTRATAMENTO");
@@ -73,4 +82,15 @@ public class Doenca {
 		}
 	}
 
+	public static List<DoencaTO> listarTodos() throws Exception {
+		List<DoencaTO> u = null;
+		String sql = "SELECT * FROM DOENCA ;";
+		List<DoencaTO> r = consultar(sql);
+		if (r != null) {
+			u = r;
+		} else {
+			throw new Exception("Nenhuma doença localizada!");
+		}
+		return u;
+	}
 }

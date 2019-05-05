@@ -29,6 +29,25 @@ public class Acesso {
 		return u;
 	}
 	
+	public static UsuarioTO consultarById(int id) throws Exception
+	{
+		UsuarioTO  u = null;
+		String sql = "SELECT * FROM USUARIO "
+				+ " WHERE 1=1"
+				+ " AND  ID_USUARIO = @id ;";
+		
+		sql = DAO.format(sql, "id", id);		
+		List<UsuarioTO> r = consultar(sql);
+		if (r != null)
+		{
+			u = r.get(0);
+		}else
+		{
+			throw new Exception("Usuario não localizado!");
+		}
+		return u;
+	}
+	
 	private static List<UsuarioTO> consultar(String sql) {
 
 		List<UsuarioTO> l = new ArrayList<UsuarioTO>();
