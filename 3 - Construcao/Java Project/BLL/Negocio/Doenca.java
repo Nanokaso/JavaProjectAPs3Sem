@@ -22,7 +22,7 @@ public class Doenca {
 
 			sql = DAO.format(sql, "iddoenca", IdDoenca);
 
-			ResultSet rs = DAO.NewStm().executeQuery(sql);
+			ResultSet rs = DAO.NewStm().executeQuery(sql + ";");
 			while (rs.next()) {
 				TratamentoTO c = new TratamentoTO();
 
@@ -51,7 +51,7 @@ public class Doenca {
 		List<DoencaTO> l = new ArrayList<DoencaTO>();
 		DAO.Conectar();
 		try {
-			ResultSet rs = DAO.NewStm().executeQuery(sql);
+			ResultSet rs = DAO.NewStm().executeQuery(sql + ";");
 			while (rs.next()) {
 				DoencaTO c = new DoencaTO();
 				c.ID_DOENCA = rs.getInt("ID_DOENCA");
@@ -84,10 +84,27 @@ public class Doenca {
 
 	public static List<DoencaTO> listarTodos() throws Exception {
 		List<DoencaTO> u = null;
-		String sql = "SELECT * FROM DOENCA ;";
+		String sql = "SELECT * FROM DOENCA ";
 		List<DoencaTO> r = consultar(sql);
 		if (r != null) {
 			u = r;
+		} else {
+			throw new Exception("Nenhuma doença localizada!");
+		}
+		return u;
+	}
+	
+	public static DoencaTO consultar(int IdDoenca) throws Exception {
+		DoencaTO u = null;
+		
+		String sql = "SELECT * FROM DOENCA " 
+		+ " WHERE 1=1" 
+		+ " AND  ID_DOENCA = @IDDOENCA";
+		sql = DAO.format(sql, "IDDOENCA", IdDoenca);		
+	
+		List<DoencaTO> r = consultar(sql);
+		if (r != null) {
+			u = r.get(0);
 		} else {
 			throw new Exception("Nenhuma doença localizada!");
 		}
