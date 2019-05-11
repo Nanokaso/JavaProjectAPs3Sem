@@ -1,10 +1,15 @@
 package controllers;
 
-public class Login {
-	
-	
-	public static void Index()
-	{
+import appStart.myView;
+
+public class Login  extends BaseController {
+
+	public myView Index() {
+
+		Object model = null;
 		
+		
+
+		return super.View(model, super.Action);
 	}
 }

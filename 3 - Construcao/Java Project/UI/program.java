@@ -3,10 +3,17 @@ import java.util.List;
 import TOs.DoencaTO;
 import TOs.TratamentoTO;
 import TOs.UsuarioTO;
+import controllers.Login;
 
 public class program {
 
 	public static void main(String[] args) {	
+		
+		
+		Login a = new Login();
+		a.Index();
+		
+		
 		String usu = "nano";
 		String sen = "123";
 		try {

@@ -19,10 +19,25 @@ public class PacienteDoenca {
 		}
 		return u;
 	}
-	
+
 	public static List<PacienteDoencaTO> consultar(int IdDoenca, int IdPaciente, int IdEndereco) throws Exception {
 		List<PacienteDoencaTO> u = null;
-		String sql = "SELECT * FROM PACIENTE_DOENCA ";
+		String sql = "SELECT * FROM PACIENTE_DOENCA " + "WHERE 1=1 ";
+		if (IdDoenca > 0) {
+			sql += " AND Id_Doenca = @IdDoenca";
+			sql = DAO.format(sql, "IdDoenca", IdDoenca);
+		}
+
+		if (IdPaciente > 0) {
+			sql += " AND Id_Paciente = @IdPaciente";
+			sql = DAO.format(sql, "IdPaciente", IdPaciente);
+		}
+
+		if (IdEndereco > 0) {
+			sql += " AND Id_Endereco = @IdEndereco";
+			sql = DAO.format(sql, "IdEndereco", IdEndereco);
+		}
+
 		List<PacienteDoencaTO> r = consultar(sql);
 		if (r != null) {
 			u = r;
@@ -31,7 +46,7 @@ public class PacienteDoenca {
 		}
 		return u;
 	}
-	
+
 	private static List<PacienteDoencaTO> consultar(String sql) {
 
 		List<PacienteDoencaTO> l = new ArrayList<PacienteDoencaTO>();
@@ -66,7 +81,7 @@ public class PacienteDoenca {
 			return null;
 		} else {
 			for (PacienteDoencaTO pacienteDoencaTO : l) {
-				
+
 				try {
 					pacienteDoencaTO.DOENCA = Doenca.consultar(pacienteDoencaTO.DOENCA.ID_DOENCA);
 				} catch (Exception e) {
@@ -76,8 +91,11 @@ public class PacienteDoenca {
 					pacienteDoencaTO.PACIENTE = Paciente.consultar(pacienteDoencaTO.PACIENTE.ID_PACIENTE);
 				} catch (Exception e) {
 				}
-				
-				pacienteDoencaTO.ENDERECO = Endereco.
+
+				try {
+					pacienteDoencaTO.ENDERECO = Endereco.consultar(pacienteDoencaTO.ENDERECO.ID_ENDERECO);
+				} catch (Exception e) {
+				}
 			}
 			return l;
 		}
