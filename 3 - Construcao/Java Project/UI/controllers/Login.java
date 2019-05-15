@@ -1,15 +1,44 @@
 package controllers;
 
-import appStart.myView;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Login  extends BaseController {
+import javax.swing.JOptionPane;
 
-	public myView Index() {
+import TOs.UsuarioTO;
+import models.IAction;
+import models.IActionItem;
 
-		Object model = null;
-		
-		
+public class Login extends BaseController {
 
-		return super.View(model, super.Action);
+	public void Index() {
+
+		List<IActionItem> itens = new ArrayList<IActionItem>();
+		itens.add(new IActionItem("btnLogar", new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String login = views.templateLogin.txtLogin.getText();
+				String senha = views.templateLogin.txtSenha.getText();
+
+				try {
+					UsuarioTO usu = Negocio.Acesso.Logar(login, senha);
+					if (usu != null) {
+						JOptionPane.showMessageDialog(null, "Logado!");
+					} else {
+						throw new Exception("");
+					}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Login ou Senha inválidos!");
+					e1.printStackTrace();
+				}
+
+			}
+		}));
+		super.GenerateView(new IAction(this.getClass(), itens));
 	}
 }

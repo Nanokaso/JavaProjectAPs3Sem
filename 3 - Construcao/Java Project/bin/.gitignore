@@ -1,8 +1,4 @@
 /controllers/
-/Negocio/
-/TOs/
-/_Layout.class
-/View.class
-/MyView.class
-/shared/
+/models/
 /appStart/
+/views/

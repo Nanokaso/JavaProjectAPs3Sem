@@ -1,14 +1,34 @@
 package controllers;
 
-import appStart.myView;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
+
+import appStart.Frame;
+import models.IAction;
+import models.IActionItem;
 
 public class BaseController {
 
-	public String Controller = this.getClass().getName();
-	public String Action = Thread.currentThread().getStackTrace()[1].getMethodName();
+	public void GenerateView(IAction action) {
+		// montar a view e gerar os listeners
+		try {
+			// prepara o frame
+			Frame.PrepareNewFrame(action);
+			// procurar o template
 
-	public myView View(Object model, String action) {		
-		return new myView(model, action, Controller);
+			Class<?> template = Class.forName("views.template" + action.classe.getName().replace("controllers.", ""));
+
+			Method initMethod = template.getDeclaredMethod("init", IAction.class);
+
+			initMethod.invoke(null, action);
+			System.out.print(initMethod.getName());
+
+			// mostra frame
+			Frame.ShowFrame();
+		} catch (Exception e) {
+			System.out.print("Não foi possivel montar a view! " + e.getMessage());
+		}
+
 	}
-
 }
