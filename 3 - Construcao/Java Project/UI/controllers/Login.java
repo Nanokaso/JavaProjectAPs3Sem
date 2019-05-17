@@ -28,13 +28,15 @@ public class Login extends BaseController {
 				try {
 					UsuarioTO usu = Negocio.Acesso.Logar(login, senha);
 					if (usu != null) {
-						JOptionPane.showMessageDialog(null, "Logado!");
+						//JOptionPane.showMessageDialog(null, "Bem Vindo(a)! " + usu.LOGIN);
+						models.UsuarioAtual.usuario = usu; // setando usuario -> fake session
+						new Dashboard().Index();
 					} else {
 						throw new Exception("");
 					}
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Login ou Senha inválidos!");
-					e1.printStackTrace();
+					// e1.printStackTrace();
 				}
 
 			}

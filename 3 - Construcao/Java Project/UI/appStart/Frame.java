@@ -11,7 +11,13 @@ public class Frame {
 	public static JFrame frame = null;
 
 	public static void PrepareNewFrame(IAction model) {
-		frame = new JFrame();
+
+		if (frame == null) {
+			frame = new JFrame();
+		} else {
+			frame.dispose();
+			frame = new JFrame();
+		}
 		frame.setTitle(model.TitlePage);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();

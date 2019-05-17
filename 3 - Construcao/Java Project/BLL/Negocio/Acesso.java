@@ -36,6 +36,20 @@ public class Acesso {
 		}
 		return u;
 	}
+	
+	public static List<UsuarioTO> listar() throws Exception {
+		List<UsuarioTO> u = null;
+		String sql = "SELECT * FROM USUARIO " + " WHERE 1=1" + " AND  FLG_ATIVO = @id ";
+
+		sql = DAO.format(sql, "id", true);
+		List<UsuarioTO> r = consultar(sql);
+		if (r != null) {
+			u = r;
+		} else {
+			throw new Exception("Usuarios não localizado!");
+		}
+		return u;
+	}
 
 	private static List<UsuarioTO> consultar(String sql) {
 

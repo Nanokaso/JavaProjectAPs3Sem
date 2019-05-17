@@ -9,7 +9,7 @@ import java.util.List;
 public class Endereco {
 
 	public static List<GenericTO<String, String>> getCidadesUF() {
-		List<GenericTO<String, String>> l = null;
+		List<GenericTO<String, String>> l = new ArrayList<GenericTO<String, String>>();
 
 		DAO.Conectar();
 		try {
@@ -17,7 +17,7 @@ public class Endereco {
 					+ "INNER JOIN PACIENTE_DOENCA AS PC ON PC.ID_ENDERECO = E.ID_ENDERECO ";
 			ResultSet rs = DAO.NewStm().executeQuery(sql + ";");
 			while (rs.next()) {
-				GenericTO<String, String> c = new GenericTO<String, String>();
+				GenericTO<String, String> c = new GenericTO<String, String>();				
 				c.SetAll(rs.getString("CIDADE"), rs.getString("UF"));
 				l.add(c);
 			}

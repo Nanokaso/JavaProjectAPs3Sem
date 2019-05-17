@@ -20,7 +20,7 @@ public class PacienteDoenca {
 		return u;
 	}
 
-	public static List<PacienteDoencaTO> consultar(int IdDoenca, int IdPaciente, int IdEndereco) throws Exception {
+	public static List<PacienteDoencaTO> consultar(int IdDoenca, int IdPaciente, int IdEndereco, boolean onlyFalecidos) throws Exception {
 		List<PacienteDoencaTO> u = null;
 		String sql = "SELECT * FROM PACIENTE_DOENCA " + "WHERE 1=1 ";
 		if (IdDoenca > 0) {
@@ -36,6 +36,11 @@ public class PacienteDoenca {
 		if (IdEndereco > 0) {
 			sql += " AND Id_Endereco = @IdEndereco";
 			sql = DAO.format(sql, "IdEndereco", IdEndereco);
+		}
+		if(onlyFalecidos)
+		{
+			sql += " AND FLG_FALECIDO = @Falecido";
+			sql = DAO.format(sql, "Falecido", onlyFalecidos);
 		}
 
 		List<PacienteDoencaTO> r = consultar(sql);

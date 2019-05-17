@@ -17,10 +17,10 @@ public class templateLogin {
 		// setando layout
 
 		appStart.Frame.frame.setLayout(new GridBagLayout());
-		
-		// tamanho pro login
-		appStart.Frame. SetNewSize(350, 450);
-		
+
+		// tamanho pro login -> opcional
+		appStart.Frame.SetNewSize(350, 450);
+
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
