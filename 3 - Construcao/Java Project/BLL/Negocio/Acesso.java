@@ -10,7 +10,11 @@ public class Acesso {
 
 	public static UsuarioTO Logar(String login, String senha) throws Exception {
 		UsuarioTO u = null;
-		String sql = "SELECT * FROM USUARIO " + " WHERE 1=1" + " AND  LOGIN = @LOGIN" + " AND SENHA = @SENHA";
+		String sql = "SELECT * FROM USUARIO " 
+		+ " WHERE 1=1" 
+		+ " AND  LOGIN = @LOGIN" 
+		+ " AND SENHA = @SENHA"
+		+ " AND FLG_ATIVO = 1";
 
 		sql = DAO.format(sql, "LOGIN", login);
 		sql = DAO.format(sql, "SENHA", senha);
@@ -19,6 +23,19 @@ public class Acesso {
 			u = r.get(0);
 		} else {
 			throw new Exception("Usuario não localizado!");
+		}
+		return u;
+	}
+	
+	public static UsuarioTO consultarByLogin(String login) throws Exception {
+		UsuarioTO u = null;
+		String sql = "SELECT * FROM USUARIO " + " WHERE 1=1" + " AND  LOGIN = @LOGIN";
+		sql = DAO.format(sql, "LOGIN", login);		
+		List<UsuarioTO> r = consultar(sql);
+		if (r != null) {
+			u = r.get(0);
+		} else {
+			return null;
 		}
 		return u;
 	}
@@ -32,23 +49,70 @@ public class Acesso {
 		if (r != null) {
 			u = r.get(0);
 		} else {
-			throw new Exception("Usuario não localizado!");
+			return null;
 		}
 		return u;
 	}
 	
-	public static List<UsuarioTO> listar() throws Exception {
+	public static List<UsuarioTO> listar(boolean somenteAtivos) {
 		List<UsuarioTO> u = null;
-		String sql = "SELECT * FROM USUARIO " + " WHERE 1=1" + " AND  FLG_ATIVO = @id ";
+		String sql = "SELECT * FROM USUARIO " + " WHERE 1=1";
+		if (somenteAtivos)
+		{
+			sql+=" AND  FLG_ATIVO = @id ";
+			sql = DAO.format(sql, "id", true);		
+		}
 
-		sql = DAO.format(sql, "id", true);
 		List<UsuarioTO> r = consultar(sql);
 		if (r != null) {
 			u = r;
 		} else {
-			throw new Exception("Usuarios não localizado!");
+			return null;
 		}
 		return u;
+	}
+	
+	
+	
+	public static void incluir(UsuarioTO usuario) {
+		DAO.Conectar();
+		Savepoint savePoint = DAO.IniciarSQL();
+		try {
+			String sql = "INSERT INTO usuario(LOGIN, SENHA, FLG_ATIVO) values(@LOGIN, @SENHA, @ATIVO);";
+			sql = DAO.format(sql, "LOGIN", usuario.LOGIN);
+			sql = DAO.format(sql, "SENHA", usuario.SENHA);
+			sql = DAO.format(sql, "ATIVO", usuario.FLG_ATIVO);			
+			DAO.NewStm().executeUpdate(sql);
+			DAO.ConfirmarSQL(); 
+		} catch (Exception e) {
+			DAO.CancelarSQL(savePoint);
+			System.out.print(e.getMessage());
+		} finally {
+			DAO.Fechar();
+		}
+	}
+	
+	public static void alterar(UsuarioTO usuario) {
+		DAO.Conectar();
+		Savepoint savePoint = DAO.IniciarSQL();
+		try {
+			String sql = "UPDATE usuario SET "
+					+ " LOGIN = @LOGIN, "
+					+ " SENHA = @SENHA, "
+					+ " FLG_ATIVO = @ATIVO "
+					+ " WHERE ID_USUARIO = @IDUSU;";
+			sql = DAO.format(sql, "LOGIN", usuario.LOGIN);
+			sql = DAO.format(sql, "SENHA", usuario.SENHA);
+			sql = DAO.format(sql, "ATIVO", usuario.FLG_ATIVO);
+			sql = DAO.format(sql, "IDUSU", usuario.ID_USUARIO);
+			DAO.NewStm().executeUpdate(sql);
+			DAO.ConfirmarSQL(); 
+		} catch (Exception e) {
+			DAO.CancelarSQL(savePoint);
+			System.out.print(e.getMessage());
+		} finally {
+			DAO.Fechar();
+		}
 	}
 
 	private static List<UsuarioTO> consultar(String sql) {

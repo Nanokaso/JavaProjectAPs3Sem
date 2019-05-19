@@ -14,6 +14,7 @@ public class templateDashboard {
 	public static JButton btnSair;
 	public static JButton btnAddUsuario;
 	public static JButton btnDesativarUsuario;
+	public static JButton btnListarUsuario;
 	public static JButton btnAddPaciente;
 	public static JButton btnListarPaciente;
 	public static JButton btnListarDoencas;
@@ -27,7 +28,7 @@ public class templateDashboard {
 		Border padding = BorderFactory.createEmptyBorder(emcimaBaixo, lados, emcimaBaixo, lados);
 		contentPanel.setBorder(padding);
 		appStart.Frame.frame.setContentPane(contentPanel);
-		int totalColunas = 6;
+		int totalColunas = 7;
 		appStart.Frame.frame.setLayout(new GridLayout(0, totalColunas));
 
 		for (int i = 0; i < totalColunas - 2; i++) {
@@ -48,16 +49,26 @@ public class templateDashboard {
 		// pula uma linha inteira
 		for (int i = 0; i < totalColunas; i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
+		}		
+		
+		int qtdUsuarioDes = 0;
+		try {
+			qtdUsuarioDes = Negocio.Acesso.listar(false).size();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-
+		JLabel lbl0 = new templateBase().BaseLblTextCenter;
+		lbl0.setText(appStart.UtilsString.setText(qtdUsuarioDes + "<br/> Usuarios cadastrados"));
+		appStart.Frame.frame.add(lbl0);
+		
 		int qtdUsuario = 0;
 		try {
-			qtdUsuario = Negocio.Acesso.listar().size();
+			qtdUsuario = Negocio.Acesso.listar(true).size();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		JLabel lbl1 = new templateBase().BaseLblTextCenter;
-		lbl1.setText(appStart.UtilsString.setText(qtdUsuario + "<br/> Usuarios"));
+		lbl1.setText(appStart.UtilsString.setText(qtdUsuario + "<br/> Usuarios Ativos"));
 		appStart.Frame.frame.add(lbl1);
 
 		int qtdDoencas = 0;
@@ -114,6 +125,7 @@ public class templateDashboard {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
 
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
 		btnAddUsuario = new templateBase().BaseBtn;
 		btnAddUsuario.setName("btnAddUsuario");
 		btnAddUsuario.setText("Adicionar Usuario");
@@ -124,20 +136,27 @@ public class templateDashboard {
 
 		btnDesativarUsuario = new templateBase().BaseBtn;
 		btnDesativarUsuario.setName("btnDesativarUsuario");
-		btnDesativarUsuario.setText("Desativar Usuario");
+		btnDesativarUsuario.setText("Ativar/Desativar Usuario");
 		btnDesativarUsuario.setToolTipText("");
 		addActionIfExists(action, "btnDesativarUsuario", btnDesativarUsuario);
 		appStart.Frame.frame.add(btnDesativarUsuario);
 		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
-		appStart.Frame.frame.add(new templateBase().BaseEspace);
-		appStart.Frame.frame.add(new templateBase().BaseEspace);
+		btnListarUsuario = new templateBase().BaseBtn;
+		btnListarUsuario.setName("btnListarUsuario");
+		btnListarUsuario.setText("Listar Usuario");
+		btnListarUsuario.setToolTipText("");
+		addActionIfExists(action, "btnListarUsuario", btnListarUsuario);
+		appStart.Frame.frame.add(btnListarUsuario);
+		appStart.Frame.frame.add(new templateBase().BaseEspace);	
+		
 
 		// pula uma linha inteira
 		for (int i = 0; i < totalColunas; i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
 
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
 		btnAddPaciente = new templateBase().BaseBtn;
 		btnAddPaciente.setName("btnAddPaciente");
 		btnAddPaciente.setText("Adicionar Paciente");

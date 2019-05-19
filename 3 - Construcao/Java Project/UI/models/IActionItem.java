@@ -1,9 +1,8 @@
 package models;
 
 import java.awt.event.ActionListener;
-
 public class IActionItem {
-
+	
 	public String idElement;
 	public String title;
 	public ActionListener acao;

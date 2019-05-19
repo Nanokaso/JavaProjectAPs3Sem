@@ -15,6 +15,15 @@ public class templateBase {
 	
 	public JLabel BaseLblTextCenter;
 
+	public JLabel basicTextLabelCenter(String txtHtml)
+	{
+		JLabel lbl = new JLabel();
+		lbl.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl.setVerticalAlignment(SwingConstants.CENTER);		
+		lbl.setText(appStart.UtilsString.setText(txtHtml));
+		return lbl;
+	}
+	
 	public templateBase() {
 		BaseBtn = new JButton();
 		BaseBtn.setBackground(Color.orange);

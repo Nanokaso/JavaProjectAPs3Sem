@@ -34,11 +34,19 @@ public class Dashboard extends BaseController {
 		itens.add(new IActionItem("btnAddUsuario", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				new UsuarioAdicionar().Index();
 			}
 		}));
 		itens.add(new IActionItem("btnDesativarUsuario", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				new UsuarioAtivarDesativar().Index();
+			}
+		}));
+		itens.add(new IActionItem("btnListarUsuario", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new UsuarioListar().Index();
 			}
 		}));
 		itens.add(new IActionItem("btnAddPaciente", new ActionListener() {
