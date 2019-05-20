@@ -73,6 +73,13 @@ public class Dashboard extends BaseController {
 				new EnderecoAdicionar().Index();
 			}
 		}));
+		itens.add(new IActionItem("btnListarEndereco", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EnderecoListar().Index();
+			}
+		}));	
+		
 		super.GenerateView(new IAction(this.getClass(), itens));
 	}
 }

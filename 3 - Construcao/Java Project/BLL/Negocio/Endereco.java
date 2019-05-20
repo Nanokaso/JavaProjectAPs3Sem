@@ -32,6 +32,19 @@ public class Endereco {
 			return l;
 		}
 	}
+	
+	public static List<EnderecoTO> listarTodos(){
+		List<EnderecoTO> u = null;
+		String sql = "SELECT * FROM ENDERECO ";
+		List<EnderecoTO> r = consultar(sql);
+		if (r != null) {
+			u = r;
+		} else {
+			return null;
+		}
+		return u;
+	}
+
 
 	public static List<EnderecoTO> consultar(String cidade, String uf, int cep) throws Exception {
 		List<EnderecoTO> u = null;
