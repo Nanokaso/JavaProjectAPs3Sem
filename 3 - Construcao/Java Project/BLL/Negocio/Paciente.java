@@ -34,6 +34,48 @@ public class Paciente {
 		}
 		return u;
 	}
+	
+	public static PacienteTO consultarByRgOrCPF(String rg, String cpf) {
+		PacienteTO u = null;
+
+		String sql = "SELECT * FROM PACIENTE " + " WHERE 1=1" + " AND  "
+				+ "( RG = @RG"
+				+ " OR CPF = @CPF) ";
+		sql = DAO.format(sql, "RG", rg);
+		sql = DAO.format(sql, "CPF", cpf);
+
+		List<PacienteTO> r = consultar(sql);
+		if (r != null) {
+			u = r.get(0);
+		} else {
+			return null;
+		}
+		return u;
+	}
+	
+	
+	public static void incluir(PacienteTO obj) {
+		DAO.Conectar();
+		Savepoint savePoint = DAO.IniciarSQL();
+		try {
+			String sql = "INSERT INTO PACIENTE( NOME_PACIENTE , DT_NASCIMENTO , CPF , RG , SEXO ) "
+					+ " VALUES ( @NOMEPACIENTE , @DTNASCIMENTO , @CPF , @RG , @SEXO );";
+			
+			sql = DAO.format(sql, "NOMEPACIENTE", obj.NOME_PACIENTE);
+			sql = DAO.format(sql, "DTNASCIMENTO", obj.DT_NASCIMENTO);
+			sql = DAO.format(sql, "CPF", obj.CPF);
+			sql = DAO.format(sql, "RG", obj.RG);
+			sql = DAO.format(sql, "SEXO", obj.SEXO);			
+			
+			DAO.NewStm().executeUpdate(sql);
+			DAO.ConfirmarSQL(); 
+		} catch (Exception e) {
+			DAO.CancelarSQL(savePoint);
+			System.out.print(e.getMessage());
+		} finally {
+			DAO.Fechar();
+		}
+	}
 
 	private static List<PacienteTO> consultar(String sql) {
 

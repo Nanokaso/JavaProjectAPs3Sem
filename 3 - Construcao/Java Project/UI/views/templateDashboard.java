@@ -18,6 +18,7 @@ public class templateDashboard {
 	public static JButton btnAddPaciente;
 	public static JButton btnListarPaciente;
 	public static JButton btnListarDoencas;
+	public static JButton btnAdicionarEndereco;
 
 	public static void init(IAction action) {
 
@@ -27,6 +28,7 @@ public class templateDashboard {
 		int lados = 60;
 		Border padding = BorderFactory.createEmptyBorder(emcimaBaixo, lados, emcimaBaixo, lados);
 		contentPanel.setBorder(padding);
+		contentPanel.setBackground(new Color(20, 30, 40));
 		appStart.Frame.frame.setContentPane(contentPanel);
 		int totalColunas = 7;
 		appStart.Frame.frame.setLayout(new GridLayout(0, totalColunas));
@@ -41,6 +43,7 @@ public class templateDashboard {
 
 		btnSair = new templateBase().BaseBtnMargin;
 		btnSair.setName("btnSair");
+		templateBase.setColorButton(btnSair, templateBase.enColorButton.Danger);
 		btnSair.setText("Sair");
 		btnSair.setToolTipText("Voltar para login");
 		addActionIfExists(action, "btnSair", btnSair);
@@ -49,8 +52,8 @@ public class templateDashboard {
 		// pula uma linha inteira
 		for (int i = 0; i < totalColunas; i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
-		}		
-		
+		}
+
 		int qtdUsuarioDes = 0;
 		try {
 			qtdUsuarioDes = Negocio.Acesso.listar(false).size();
@@ -60,7 +63,7 @@ public class templateDashboard {
 		JLabel lbl0 = new templateBase().BaseLblTextCenter;
 		lbl0.setText(appStart.UtilsString.setText(qtdUsuarioDes + "<br/> Usuarios cadastrados"));
 		appStart.Frame.frame.add(lbl0);
-		
+
 		int qtdUsuario = 0;
 		try {
 			qtdUsuario = Negocio.Acesso.listar(true).size();
@@ -104,7 +107,7 @@ public class templateDashboard {
 		int qtdMortos = 0;
 		try {
 			qtdMortos = Negocio.PacienteDoenca.consultar(0, 0, 0, true).size();
-		} catch (Exception e) {			
+		} catch (Exception e) {
 		}
 		JLabel lbl5 = new templateBase().BaseLblTextCenter;
 		lbl5.setText(appStart.UtilsString.setText(qtdMortos + "<br/> Falecidos"));
@@ -113,7 +116,7 @@ public class templateDashboard {
 		int qtdCidades = 0;
 		try {
 			qtdCidades = Negocio.Endereco.getCidadesUF().size();
-		} catch (Exception e) {		
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		JLabel lbl6 = new templateBase().BaseLblTextCenter;
@@ -148,8 +151,7 @@ public class templateDashboard {
 		btnListarUsuario.setToolTipText("");
 		addActionIfExists(action, "btnListarUsuario", btnListarUsuario);
 		appStart.Frame.frame.add(btnListarUsuario);
-		appStart.Frame.frame.add(new templateBase().BaseEspace);	
-		
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
 		// pula uma linha inteira
 		for (int i = 0; i < totalColunas; i++) {
@@ -181,11 +183,20 @@ public class templateDashboard {
 		appStart.Frame.frame.add(btnListarDoencas);
 		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
-		for (IActionItem acao : action.acoes) {
-			if ("btnLogar".contains(acao.idElement)) {
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
-			}
+		// pula uma linha inteira
+		for (int i = 0; i < totalColunas; i++) {
+			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
+
+		btnAdicionarEndereco = new templateBase().BaseBtn;
+		btnAdicionarEndereco.setName("btnAdicionarEndereco");
+		btnAdicionarEndereco.setText("Adicionar endereço");
+		btnAdicionarEndereco.setToolTipText("");
+		addActionIfExists(action, "btnAdicionarEndereco", btnAdicionarEndereco);
+		appStart.Frame.frame.add(btnAdicionarEndereco);
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
 		for (int i = 0; i < 30; i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);

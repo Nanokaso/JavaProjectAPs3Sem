@@ -26,6 +26,7 @@ public class templateLogin {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 
 		btnLogar = new templateBase().BaseBtn;
+		templateBase.setColorButton(btnLogar, templateBase.enColorButton.Primary);
 		btnLogar.setName("btnLogar");
 		btnLogar.setText("Logar");
 

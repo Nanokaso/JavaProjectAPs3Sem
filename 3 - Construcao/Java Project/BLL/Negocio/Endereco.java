@@ -74,6 +74,32 @@ public class Endereco {
 		}
 		return u;
 	}
+	
+	public static void incluir(EnderecoTO obj) {
+		DAO.Conectar();
+		Savepoint savePoint = DAO.IniciarSQL();
+		try {
+			String sql = "INSERT INTO Endereco (ENDERECO,BAIRRO,NUMERO,CEP,COMPLEMENTO,CIDADE,UF) "
+					+ " VALUES (@ENDERECO, @BAIRRO, @NUMERO, @CEP, @COMPLEMENTO, @CIDADE, @UF);";
+			
+			sql = DAO.format(sql, "ENDERECO", obj.ENDERECO);
+			sql = DAO.format(sql, "BAIRRO", obj.BAIRRO);
+			sql = DAO.format(sql, "NUMERO", obj.NUMERO);
+			sql = DAO.format(sql, "CEP", obj.CEP);
+			sql = DAO.format(sql, "COMPLEMENTO", obj.COMPLEMENTO);
+			sql = DAO.format(sql, "CIDADE", obj.CIDADE);
+			sql = DAO.format(sql, "UF", obj.UF);		
+			
+			DAO.NewStm().executeUpdate(sql);
+			DAO.ConfirmarSQL(); 
+		} catch (Exception e) {
+			DAO.CancelarSQL(savePoint);
+			System.out.print(e.getMessage());
+		} finally {
+			DAO.Fechar();
+		}
+	}
+	
 
 	private static List<EnderecoTO> consultar(String sql) {
 

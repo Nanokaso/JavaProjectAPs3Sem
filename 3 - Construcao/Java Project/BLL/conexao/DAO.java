@@ -4,6 +4,13 @@ import java.sql.*;
 
 public class DAO {
 
+	public static String format(String sql, String identifier, java.util.Date value) {
+
+		String data = "STR_TO_DATE('" + value.getDay() + "-" + value.getMonth() + "-" + value.getYear()
+				+ "','%d-%m-%Y')";
+		return sql.replace("@" + identifier, data);
+	}
+
 	public static String format(String sql, String identifier, String value) {
 		return sql.replace("@" + identifier, "'" + value + "'");
 	}

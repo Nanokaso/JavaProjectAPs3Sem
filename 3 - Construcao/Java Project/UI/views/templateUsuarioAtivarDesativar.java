@@ -45,6 +45,7 @@ public class templateUsuarioAtivarDesativar {
 		
 		btnAtivar = new templateBase().BaseBtn;
 		btnAtivar.setName("btnAtivar");
+		templateBase.setColorButton(btnAtivar, templateBase.enColorButton.Success);
 		btnAtivar.setText("Ativar");
 		btnAtivar.addActionListener(action.getActionByIdElement("btnAtivar", action.acoes));
 		appStart.Frame.frame.add(btnAtivar, gbc);	
@@ -52,6 +53,7 @@ public class templateUsuarioAtivarDesativar {
 		appStart.Frame.frame.add(new templateBase().BaseEspace, gbc);	
 		
 		btnDesativar = new templateBase().BaseBtn;
+		templateBase.setColorButton(btnDesativar, templateBase.enColorButton.Danger);
 		btnDesativar.setName("btnDesativar");
 		btnDesativar.setText("Desativar");
 		btnDesativar.addActionListener(action.getActionByIdElement("btnDesativar", action.acoes));

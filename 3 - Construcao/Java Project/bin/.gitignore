@@ -1,4 +1,5 @@
-/controllers/
 /views/
-/models/
+/appStart/
+/controllers/
 /Negocio/
+/conexao/

@@ -63,6 +63,7 @@ public class templateUsuarioAdicionar {
 		appStart.Frame.frame.add(new templateBase().BaseEspace, gbc);	
 		
 		btnAdicionar = new templateBase().BaseBtn;
+		templateBase.setColorButton(btnAdicionar, templateBase.enColorButton.Success);
 		btnAdicionar.setName("btnAdicionar");
 		btnAdicionar.setText("Adicionar");
 		btnAdicionar.addActionListener(action.getActionByIdElement("btnAdicionar", action.acoes));

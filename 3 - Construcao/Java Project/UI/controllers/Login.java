@@ -17,6 +17,15 @@ public class Login extends BaseController {
 	public void Index() {
 
 		List<IActionItem> itens = new ArrayList<IActionItem>();
+		
+		itens.add(new IActionItem("onload", new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				views.templateLogin.txtLogin.setText("Administrador");
+				views.templateLogin.txtSenha.setText("Aa1234");
+			}
+		}));
 		itens.add(new IActionItem("btnLogar", new ActionListener() {
 
 			@Override
@@ -28,7 +37,7 @@ public class Login extends BaseController {
 				try {
 					UsuarioTO usu = Negocio.Acesso.Logar(login, senha);
 					if (usu != null) {
-						//JOptionPane.showMessageDialog(null, "Bem Vindo(a)! " + usu.LOGIN);
+						// JOptionPane.showMessageDialog(null, "Bem Vindo(a)! " + usu.LOGIN);
 						models.UsuarioAtual.usuario = usu; // setando usuario -> fake session
 						new Dashboard().Index();
 					} else {

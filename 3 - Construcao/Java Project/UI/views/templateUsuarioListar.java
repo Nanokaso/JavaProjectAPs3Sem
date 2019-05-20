@@ -1,13 +1,18 @@
 package views;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -25,6 +30,7 @@ public class templateUsuarioListar {
 		int lados = 10;
 		Border padding = BorderFactory.createEmptyBorder(emcimaBaixo, lados, emcimaBaixo, lados);
 		contentPanel.setBorder(padding);
+		contentPanel.setBackground(new Color(20, 30, 40));
 		appStart.Frame.frame.setContentPane(contentPanel);
 		int totalColunas = 4;
 		appStart.Frame.frame.setLayout(new GridLayout(0, totalColunas));
@@ -39,7 +45,6 @@ public class templateUsuarioListar {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
 
-		
 		appStart.Frame.frame.add(new templateBase().basicTextLabelCenter("ID:"));
 		appStart.Frame.frame.add(new templateBase().basicTextLabelCenter("LOGIN:"));
 		appStart.Frame.frame.add(new templateBase().basicTextLabelCenter("SENHA:"));
@@ -47,21 +52,38 @@ public class templateUsuarioListar {
 		for (int i = 0; i < totalColunas; i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
+		int quantidadeRegistro =0;
 		try {
 			List<UsuarioTO> usuarios = Negocio.Acesso.listar(false);
 			if (usuarios != null) {
 
-				for (UsuarioTO usu : usuarios) {					
+				quantidadeRegistro = usuarios.size();
+				for (UsuarioTO usu : usuarios) {
 					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(usu.ID_USUARIO + ""));
 					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(usu.LOGIN + ""));
-					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(usu.SENHA + ""));
+
+					JButton btn = new templateBase().BaseBtn;
+					btn.setText("Clique aqui para ver!");
+					templateBase.setColorButton(btn, templateBase.enColorButton.Invisible);
+					btn.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							JOptionPane.showMessageDialog(null, ">>>   " + usu.SENHA + "");
+
+						}
+					});
+					appStart.Frame.frame.add(btn);
+					// appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(usu.SENHA +
+					// ""));
+
 					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(usu.FLG_ATIVO ? "Sim" : "Não"));
-				}				
+				}
 			}
 		} catch (Exception e) {
 		}
 
-		for (int i = 0; i < totalColunas * 2; i++) {
+		for (int i = 0; i < totalColunas * (15 - quantidadeRegistro); i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
 
