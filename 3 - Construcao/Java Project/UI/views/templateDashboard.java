@@ -20,6 +20,7 @@ public class templateDashboard {
 	public static JButton btnListarDoencas;
 	public static JButton btnAdicionarEndereco;
 	public static JButton btnListarEndereco;
+	public static JButton btnPacienteDoencaAdicionar;
 
 	public static void init(IAction action) {
 
@@ -205,6 +206,14 @@ public class templateDashboard {
 		btnListarEndereco.setToolTipText("");
 		addActionIfExists(action, "btnListarEndereco", btnListarEndereco);
 		appStart.Frame.frame.add(btnListarEndereco);
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
+		
+		btnPacienteDoencaAdicionar = new templateBase().BaseBtn;
+		btnPacienteDoencaAdicionar.setName("btnPacienteDoencaAdicionar");
+		btnPacienteDoencaAdicionar.setText("Adicionar Paciente Doença");
+		btnPacienteDoencaAdicionar.setToolTipText("");
+		addActionIfExists(action, "btnPacienteDoencaAdicionar", btnPacienteDoencaAdicionar);
+		appStart.Frame.frame.add(btnPacienteDoencaAdicionar);
 		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
 		for (int i = 0; i < 30; i++) {

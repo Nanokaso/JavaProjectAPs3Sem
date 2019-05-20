@@ -53,6 +53,22 @@ public class Paciente {
 		return u;
 	}
 	
+	public static PacienteTO consultarByCPF(String cpf) {
+		PacienteTO u = null;
+
+		String sql = "SELECT * FROM PACIENTE " + " WHERE 1=1" + " AND  "				
+				+ " CPF = @CPF ";		
+		sql = DAO.format(sql, "CPF", cpf);
+
+		List<PacienteTO> r = consultar(sql);
+		if (r != null) {
+			u = r.get(0);
+		} else {
+			return null;
+		}
+		return u;
+	}
+	
 	
 	public static void incluir(PacienteTO obj) {
 		DAO.Conectar();

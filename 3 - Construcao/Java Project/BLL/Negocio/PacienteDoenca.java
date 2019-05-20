@@ -20,7 +20,8 @@ public class PacienteDoenca {
 		return u;
 	}
 
-	public static List<PacienteDoencaTO> consultar(int IdDoenca, int IdPaciente, int IdEndereco, boolean onlyFalecidos) throws Exception {
+	public static List<PacienteDoencaTO> consultar(int IdDoenca, int IdPaciente, int IdEndereco, boolean onlyFalecidos)
+			throws Exception {
 		List<PacienteDoencaTO> u = null;
 		String sql = "SELECT * FROM PACIENTE_DOENCA " + "WHERE 1=1 ";
 		if (IdDoenca > 0) {
@@ -37,8 +38,7 @@ public class PacienteDoenca {
 			sql += " AND Id_Endereco = @IdEndereco";
 			sql = DAO.format(sql, "IdEndereco", IdEndereco);
 		}
-		if(onlyFalecidos)
-		{
+		if (onlyFalecidos) {
 			sql += " AND FLG_FALECIDO = @Falecido";
 			sql = DAO.format(sql, "Falecido", onlyFalecidos);
 		}
@@ -50,6 +50,32 @@ public class PacienteDoenca {
 			throw new Exception("Nenhum paciente doenca localizado!");
 		}
 		return u;
+	}
+
+	public static void incluir(PacienteDoencaTO obj) {
+		DAO.Conectar();
+		Savepoint savePoint = DAO.IniciarSQL();
+		try {
+			String sql = "INSERT INTO Paciente_Doenca ( ID_DOENCA, ID_PACIENTE, ID_ENDERECO, DT_INICIO, DT_TERMINO, FLG_MEDICADO, FLG_FALECIDO, DT_OBITO ) "
+					+ " VALUES ( @DOENCA, @PACIENTE, @ENDERECO, @DT_INICIO, @DT_TERMINO, @FLG_MEDICADO, @FLG_FALECIDO, @DT_OBITO );";
+
+			sql = DAO.format(sql, "DOENCA", obj.DOENCA.ID_DOENCA);
+			sql = DAO.format(sql, "PACIENTE", obj.PACIENTE.ID_PACIENTE);
+			sql = DAO.format(sql, "ENDERECO", obj.ENDERECO.ID_ENDERECO);
+			sql = DAO.format(sql, "DT_INICIO", obj.DT_INICIO);
+			sql = DAO.format(sql, "DT_TERMINO", obj.DT_TERMINO);
+			sql = DAO.format(sql, "FLG_MEDICADO", obj.FLG_MEDICADO);
+			sql = DAO.format(sql, "FLG_FALECIDO", obj.FLG_FALECIDO);
+			sql = DAO.format(sql, "DT_OBITO", obj.DT_OBITO);
+
+			DAO.NewStm().executeUpdate(sql);
+			DAO.ConfirmarSQL();
+		} catch (Exception e) {
+			DAO.CancelarSQL(savePoint);
+			System.out.print(e.getMessage());
+		} finally {
+			DAO.Fechar();
+		}
 	}
 
 	private static List<PacienteDoencaTO> consultar(String sql) {
