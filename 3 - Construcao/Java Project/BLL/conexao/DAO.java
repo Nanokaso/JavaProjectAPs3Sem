@@ -5,35 +5,44 @@ import java.sql.*;
 public class DAO {
 
 	public static String format(String sql, String identifier, java.util.Date value) {
+		if (value == null) {
+			return sql.replace("@" + identifier, "NULL");
+		} else {
 
-		String data = "STR_TO_DATE('" + value.getDay() + "-" + value.getMonth() + "-" + value.getYear()
-				+ "','%d-%m-%Y')";
-		return sql.replace("@" + identifier, data);
+			String data = "STR_TO_DATE('" + value.getDay() + "-" + value.getMonth() + "-" + value.getYear()
+					+ "','%d-%m-%Y')";
+			return sql.replace("@" + identifier, data);
+		}
 	}
 
 	public static String format(String sql, String identifier, String value) {
-		return sql.replace("@" + identifier, "'" + value + "'");
+		if (value == null) {
+			return sql.replace("@" + identifier, "NULL");
+		} else {
+			return sql.replace("@" + identifier, "'" + value + "'");
+		}
 	}
 
 	public static String format(String sql, String identifier, Boolean value) {
-
-		String valuen = (value ? 1 : 0) + "";
-		return sql.replace("@" + identifier, valuen);
+		if (value == null) {
+			return sql.replace("@" + identifier, "NULL");
+		} else {
+			String valuen = (value ? 1 : 0) + "";
+			return sql.replace("@" + identifier, valuen);
+		}
 	}
 
 	public static String format(String sql, String identifier, int value) {
-
 		String valuen = value + "";
 		return sql.replace("@" + identifier, valuen);
+
 	}
 
-	// -------------------------------------------------------------------
-
 	public static String format(String sql, String identifier, Double value) {
-
 		String valuen = value.toString();
 		return sql.replace("@" + identifier, valuen);
 	}
+	// -------------------------------------------------------------------
 
 	public static void Conectar() {
 		try {
