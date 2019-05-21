@@ -70,8 +70,33 @@ public class templateDoencaListar {
 
 					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(obj.ID_DOENCA + ""));
 					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(obj.NOME_DOENCA + ""));
-					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(obj.DESCRICAO + ""));
-					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(obj.SINTOMAS + ""));
+					
+					JButton btnDs = new templateBase().BaseBtn;
+					btnDs.setText("Clique aqui!");
+					templateBase.setColorButton(btnDs, templateBase.enColorButton.Invisible);
+
+					btnDs.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String texto = "\n \n---   "+obj.DESCRICAO.replace(",", "\n")+"    \n \n";							
+							JOptionPane.showMessageDialog(null, texto);
+						}
+					});
+					appStart.Frame.frame.add(btnDs);
+					
+					JButton btnS = new templateBase().BaseBtn;
+					btnS.setText("Clique aqui!");
+					templateBase.setColorButton(btnS, templateBase.enColorButton.Invisible);
+
+					btnS.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String texto = "\n \n---   "+obj.SINTOMAS.replace(",", "\n")+"    \n \n";							
+							JOptionPane.showMessageDialog(null, texto);
+						}
+					});
+					appStart.Frame.frame.add(btnS);					
+					
 					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(obj.MEDIADIASCURA + ""));
 					appStart.Frame.frame.add(new templateBase().basicTextLabelCenter(obj.FLG_COMUM ? "Sim" : "Não"));
 					appStart.Frame.frame
@@ -101,7 +126,7 @@ public class templateDoencaListar {
 											+ "          ";
 								}
 							}
-							JOptionPane.showMessageDialog(null, texto);
+							JOptionPane.showMessageDialog(null, texto.replace(",", "\n"));
 						}
 					});
 					appStart.Frame.frame.add(btn);
@@ -113,7 +138,7 @@ public class templateDoencaListar {
 		} catch (Exception e) {
 		}
 
-		for (int i = 0; i < totalColunas * (15 - quantidadeRegistro); i++) {
+		for (int i = 0; i < totalColunas * (5); i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
 

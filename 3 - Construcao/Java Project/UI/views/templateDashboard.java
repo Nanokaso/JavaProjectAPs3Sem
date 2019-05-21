@@ -251,7 +251,7 @@ public class templateDashboard {
 		appStart.Frame.frame.add(btnRelatorioTodasCidade);
 		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 15; i++) {
 			appStart.Frame.frame.add(new templateBase().BaseEspace);
 		}
 
