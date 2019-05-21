@@ -1,2 +1,0 @@
-﻿INSERT INTO "tratamento" ("ID_TRATAMENTO","DS_TRATAMENTO","ID_TIPOTRATAMENTO") VALUES (1,'tratamento de tete',1);
-GO

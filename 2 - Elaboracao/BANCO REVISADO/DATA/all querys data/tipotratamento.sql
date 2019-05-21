@@ -1,0 +1,2 @@
+﻿INSERT INTO [tipotratamento] ([ID_TIPOTRATAMENTO],[DS_TIPOTRATAMENTO]) VALUES (1,'Medicamento');
+GO
