@@ -27,7 +27,7 @@ public class Dashboard extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UsuarioAtual.usuario = null;
-				new controllers.Login().Index(); 
+				new controllers.Login().Index();
 			}
 		}));
 
@@ -58,7 +58,7 @@ public class Dashboard extends BaseController {
 		itens.add(new IActionItem("btnListarPaciente", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new controllers.PacienteListar().Index(); 
+				new controllers.PacienteListar().Index();
 			}
 		}));
 		itens.add(new IActionItem("btnListarDoencas", new ActionListener() {
@@ -66,7 +66,7 @@ public class Dashboard extends BaseController {
 			public void actionPerformed(ActionEvent e) {
 				new DoencaListar().Index();
 			}
-		}));		
+		}));
 		itens.add(new IActionItem("btnAdicionarEndereco", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -78,14 +78,35 @@ public class Dashboard extends BaseController {
 			public void actionPerformed(ActionEvent e) {
 				new EnderecoListar().Index();
 			}
-		}));	
+		}));
 		itens.add(new IActionItem("btnPacienteDoencaAdicionar", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new PacienteDoencaAdicionar().Index();
 			}
 		}));
-		
+
+		itens.add(new IActionItem("btnRelatorioUmaCidade", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new RelatorioCidades().Index(1);
+			}
+		}));
+
+		itens.add(new IActionItem("btnRelatorioDuasCidade", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new RelatorioCidades().Index(2);
+			}
+		}));
+
+		itens.add(new IActionItem("btnRelatorioTodasCidade", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new RelatorioCidadesMostrar().Index(null);
+			}
+		}));
+
 		super.GenerateView(new IAction(this.getClass(), itens));
 	}
 }

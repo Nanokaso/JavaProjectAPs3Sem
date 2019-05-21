@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import controllers.RelatorioCidades;
 import models.IAction;
 import models.IActionItem;
 import models.UsuarioAtual;
@@ -21,6 +22,9 @@ public class templateDashboard {
 	public static JButton btnAdicionarEndereco;
 	public static JButton btnListarEndereco;
 	public static JButton btnPacienteDoencaAdicionar;
+	public static JButton btnRelatorioUmaCidade;
+	public static JButton btnRelatorioDuasCidade;
+	public static JButton btnRelatorioTodasCidade;
 
 	public static void init(IAction action) {
 
@@ -199,7 +203,7 @@ public class templateDashboard {
 		addActionIfExists(action, "btnAdicionarEndereco", btnAdicionarEndereco);
 		appStart.Frame.frame.add(btnAdicionarEndereco);
 		appStart.Frame.frame.add(new templateBase().BaseEspace);
-		
+
 		btnListarEndereco = new templateBase().BaseBtn;
 		btnListarEndereco.setName("btnListarEndereco");
 		btnListarEndereco.setText("Listar Endereços");
@@ -207,13 +211,44 @@ public class templateDashboard {
 		addActionIfExists(action, "btnListarEndereco", btnListarEndereco);
 		appStart.Frame.frame.add(btnListarEndereco);
 		appStart.Frame.frame.add(new templateBase().BaseEspace);
-		
+
 		btnPacienteDoencaAdicionar = new templateBase().BaseBtn;
 		btnPacienteDoencaAdicionar.setName("btnPacienteDoencaAdicionar");
 		btnPacienteDoencaAdicionar.setText("Adicionar Paciente Doença");
 		btnPacienteDoencaAdicionar.setToolTipText("");
 		addActionIfExists(action, "btnPacienteDoencaAdicionar", btnPacienteDoencaAdicionar);
 		appStart.Frame.frame.add(btnPacienteDoencaAdicionar);
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
+
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
+
+		// pula uma linha inteira
+		for (int i = 0; i < totalColunas; i++) {
+			appStart.Frame.frame.add(new templateBase().BaseEspace);
+		}
+
+		btnRelatorioUmaCidade = new templateBase().BaseBtn;
+		btnRelatorioUmaCidade.setName("btnRelatorioUmaCidade");
+		btnRelatorioUmaCidade.setText("Relatório uma Cidade");
+		btnRelatorioUmaCidade.setToolTipText("");
+		addActionIfExists(action, "btnRelatorioUmaCidade", btnRelatorioUmaCidade);
+		appStart.Frame.frame.add(btnRelatorioUmaCidade);
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
+
+		btnRelatorioDuasCidade = new templateBase().BaseBtn;
+		btnRelatorioDuasCidade.setName("btnRelatorioDuasCidade");
+		btnRelatorioDuasCidade.setText("Relatório duas Cidade");
+		btnRelatorioDuasCidade.setToolTipText("");
+		addActionIfExists(action, "btnRelatorioDuasCidade", btnRelatorioDuasCidade);
+		appStart.Frame.frame.add(btnRelatorioDuasCidade);
+		appStart.Frame.frame.add(new templateBase().BaseEspace);
+
+		btnRelatorioTodasCidade = new templateBase().BaseBtn;
+		btnRelatorioTodasCidade.setName("btnRelatorioTodasCidade");
+		btnRelatorioTodasCidade.setText("Relatório Todas Cidade");
+		btnRelatorioTodasCidade.setToolTipText("");
+		addActionIfExists(action, "btnRelatorioTodasCidade", btnRelatorioTodasCidade);
+		appStart.Frame.frame.add(btnRelatorioTodasCidade);
 		appStart.Frame.frame.add(new templateBase().BaseEspace);
 
 		for (int i = 0; i < 30; i++) {

@@ -19,6 +19,17 @@ public class templateBase {
 	public JLabel basicTextLabelCenter(String txtHtml) {
 		JLabel lbl = new JLabel();
 		lbl.setForeground(Color.WHITE);
+		lbl.setFont( new Font("Arial", 0, 15));
+		lbl.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl.setVerticalAlignment(SwingConstants.CENTER);
+		lbl.setText(appStart.UtilsString.setText(txtHtml));
+		return lbl;
+	}
+	
+	public JLabel basicTextLabelCenterMR(String txtHtml) {
+		JLabel lbl = new JLabel();
+		lbl.setForeground(Color.WHITE);
+		lbl.setFont( new Font("Arial", 0, 20));
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl.setVerticalAlignment(SwingConstants.CENTER);
 		lbl.setText(appStart.UtilsString.setText(txtHtml));

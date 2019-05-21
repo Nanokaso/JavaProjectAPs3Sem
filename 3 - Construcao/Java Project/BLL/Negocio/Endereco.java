@@ -14,7 +14,8 @@ public class Endereco {
 		DAO.Conectar();
 		try {
 			String sql = " SELECT DISTINCT(E.CIDADE) AS CIDADE, E.UF FROM ENDERECO AS E "
-					+ "INNER JOIN PACIENTE_DOENCA AS PC ON PC.ID_ENDERECO = E.ID_ENDERECO ";
+					+ "INNER JOIN PACIENTE_DOENCA AS PC ON PC.ID_ENDERECO = E.ID_ENDERECO "
+					+ "ORDER BY E.UF ASC, E.CIDADE ASC;";
 			ResultSet rs = DAO.NewStm().executeQuery(sql + ";");
 			while (rs.next()) {
 				GenericTO<String, String> c = new GenericTO<String, String>();				
@@ -46,7 +47,7 @@ public class Endereco {
 	}
 
 
-	public static List<EnderecoTO> consultar(String cidade, String uf, int cep) throws Exception {
+	public static List<EnderecoTO> consultar(String cidade, String uf, int cep) {
 		List<EnderecoTO> u = null;
 		String sql = "SELECT * FROM ENDERECO " + "WHERE 1=1 ";
 		if (cep > 0) {
@@ -68,7 +69,7 @@ public class Endereco {
 		if (r != null) {
 			u = r;
 		} else {
-			throw new Exception("Nenhum paciente doenca localizado!");
+			return null;
 		}
 		return u;
 	}

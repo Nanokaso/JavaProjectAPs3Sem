@@ -8,20 +8,20 @@ import java.util.List;
 
 public class PacienteDoenca {
 
-	public static List<PacienteDoencaTO> listarTodos() throws Exception {
+	public static List<PacienteDoencaTO> listarTodos() {
 		List<PacienteDoencaTO> u = null;
 		String sql = "SELECT * FROM PACIENTE_DOENCA ";
 		List<PacienteDoencaTO> r = consultar(sql);
 		if (r != null) {
 			u = r;
 		} else {
-			throw new Exception("Nenhum paciente doenca localizado!");
+			return null;
 		}
 		return u;
 	}
 
-	public static List<PacienteDoencaTO> consultar(int IdDoenca, int IdPaciente, int IdEndereco, boolean onlyFalecidos)
-			throws Exception {
+	public static List<PacienteDoencaTO> consultar(int IdDoenca, int IdPaciente, int IdEndereco,
+			boolean onlyFalecidos) {
 		List<PacienteDoencaTO> u = null;
 		String sql = "SELECT * FROM PACIENTE_DOENCA " + "WHERE 1=1 ";
 		if (IdDoenca > 0) {
@@ -47,7 +47,7 @@ public class PacienteDoenca {
 		if (r != null) {
 			u = r;
 		} else {
-			throw new Exception("Nenhum paciente doenca localizado!");
+			return null;
 		}
 		return u;
 	}
