@@ -4,6 +4,22 @@ Trabalho da Faculdade
 
 “DESENVOLVIMENTO DE UM SISTEMA PARA PREVENÇÃO, ACOMPANHAMENTO E CONTROLE DE UMA EPIDEMIAS EM 5 CIDADES DA GRANDE SÃO PAULO”
 
+-----------------------------------------------------------------
+Organização das pastas:
+
+2-Elaboração -> Reservado para arquivos importantes como querys de banco de dados.
+3-Construção -> Projeto
+4-Programas -> Alguns programas que considero importantes e precisava em outro computador por isso coloquei no git
+
+3-Construção>Java Exportado> o nome ja diz
+3-Construção>Java Project> projeto
+3-Construção>Libs > bibliotecas importantes
+
+BLL > camada de negocio para o banco de dados
+UI > camada de negocio para interface de usuario
+
+-----------------------------------------------------------------
+
 PROPOSTA DO TRABALHO
 
 As Atividades Práticas Supervisionadas serão constituídas pelos seguintes tópicos:
